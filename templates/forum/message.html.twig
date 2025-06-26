@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}Sujet{% endblock %}
+{% block body %}
+  <h2 class="mb-4">Sujet : "Titre fictif du sujet"</h2>
+
+  {% for i in 1..4 %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <strong>User{{ i }}</strong>
+          <small class="text-muted">20/06/2025 à 14h{{ i }}</small>
+        </div>
+        <p class="mt-2 mb-0">Message n°{{ i }} - contenu fictif...</p>
+      </div>
+    </div>
+  {% endfor %}
+
+  <hr>
+
+  <h5 class="mb-3">✍️ Répondre :</h5>
+  <form method="post">
+    <div class="mb-3">
+      <textarea class="form-control" rows="4" placeholder="Votre réponse..."></textarea>
+    </div>
+    <button class="btn btn-success">Envoyer</button>
+  </form>
+{% endblock %}

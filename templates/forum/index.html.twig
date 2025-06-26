@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Accueil du Forum{% endblock %}
+{% block body %}
+  <h1 class="mb-4">Catégories</h1>
+
+  <div class="row">
+    {% for i in 1..3 %}
+      <div class="col-md-6 mb-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-primary text-white">
+            Catégorie {{ i }}
+          </div>
+          <div class="card-body">
+            <p class="card-text">Description de la catégorie {{ i }}. Elle contient plusieurs boards.</p>
+            <a href="" class="btn btn-outline-primary">Voir les boards</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

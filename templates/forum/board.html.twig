@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}Sujets{% endblock %}
+{% block body %}
+  <h2 class="mb-4">💬 Sujets</h2>
+
+  <div class="list-group">
+    {% for i in 1..5 %}
+      <a href="{{ path('forum_topic', {id: i}) }}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Sujet {{ i }} : Titre fictif</h5>
+          <small>Créé par User{{ i }}</small>
+        </div>
+        <p class="mb-1">Petit résumé du sujet {{ i }} dans ce board.</p>
+        <small class="text-muted">Posté le {{ "now"|date("d/m/Y") }}</small>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}
