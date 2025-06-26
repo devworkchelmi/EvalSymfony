@@ -11,7 +11,7 @@ final class BoardController extends AbstractController
     #[Route('/board', name: 'app_board')]
     public function index(): Response
     {
-        return $this->render('forum/board.html.twig', [
+        return $this->render('board/index.html.twig', [
             'controller_name' => 'BoardController',
         ]);
     }

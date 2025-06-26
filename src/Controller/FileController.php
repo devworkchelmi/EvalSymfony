@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class ForumController extends AbstractController
+final class FileController extends AbstractController
 {
-    #[Route('/forum', name: 'app_forum')]
+    #[Route('/file', name: 'app_file')]
     public function index(): Response
     {
-        return $this->render('forum/index.html.twig', [
-            'controller_name' => 'ForumController',
+        return $this->render('file/index.html.twig', [
+            'controller_name' => 'FileController',
         ]);
     }
 }
