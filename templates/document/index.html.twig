@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document index{% endblock %}
+
+{% block body %}
+    <h1>Document index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FileName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr>
+                <td></td>
+                <td>
+                    <a href="">show</a>
+                    <a href="">edit</a>
+                </td>
+            </tr>
+       
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+      
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_document_new') }}">Create new</a>
+{% endblock %}

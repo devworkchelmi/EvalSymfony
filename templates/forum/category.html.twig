@@ -1,15 +1,19 @@
-{% extends 'base.html.twig' %}
-{% block title %}Boards{% endblock %}
-{% block body %}
-  <h2 class="mb-4">📁 Boards</h2>
+{# Page d’une catégorie avec ses boards #}
 
-  {% for i in 1..4 %}
+{% extends 'base.html.twig' %}
+{% block title %}Boards - {{ category.name }}{% endblock %}
+{% block body %}
+  <h2 class="mb-4">📁 {{ category.name }}</h2>
+
+  {% for board in category.boards %}
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">Board {{ i }}</h5>
-        <p class="card-text">Ce board permet de discuter des sujets liés à {{ i }}.</p>
-        <a href="" class="btn btn-outline-dark">Voir les sujets</a>
+        <h5 class="card-title">{{ board.name }}</h5>
+        <p>{{ board.description }}</p>
+        <a href="{{ path('board_show', {id: board.id}) }}" class="btn btn-outline-dark">Voir les sujets</a>
       </div>
     </div>
+  {% else %}
+    <div class="alert alert-warning">Aucun board dans cette catégorie.</div>
   {% endfor %}
 {% endblock %}

@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ForumController extends AbstractController
 {
-    #[Route('/file', name: 'app_file')]
+    #[Route('/forum', name: 'app_forum')]
     public function index(): Response
     {
         // return $this->render('forum/index.html.twig', [
