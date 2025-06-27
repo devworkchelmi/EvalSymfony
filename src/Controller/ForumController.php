@@ -18,7 +18,7 @@ final class ForumController extends AbstractController
         // ])
         // ;
 
-        return $this->render('forum/topic.html.twig', [
+        return $this->render('forum/index.html.twig', [
             'topic' => 'Sujet fictif',
             'messages' => [],
         ]);

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Messages{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+    <h1 class="text-primary">💬 {{ topic.title }}</h1>
+    <p class="text-muted">Créé le {{ topic.createdAt|date('d/m/Y H:i') }}</p>
+    <hr>
+
+    {% if messages is not empty %}
+      <h4 class="mb-3">🗨️ Messages :</h4>
+      {% for message in messages %}
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <p>{{ message.content }}</p>
+            <div class="text-muted small">Posté le {{ message.createdAt|date('d/m/Y H:i') }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="alert alert-info">Aucun message pour ce sujet.</div>
+    {% endif %}
+  </div>
+{% endblock %}
