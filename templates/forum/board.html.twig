@@ -1,0 +1,19 @@
+{# Liste des sujets d’un board #}
+
+{% extends 'base.html.twig' %}
+{% block title %}Sujets {% endblock %}
+{% block body %}
+  <h2 class="mb-4">💬 </h2>
+
+    <div class="list-group mb-3 shadow-sm">
+      <a href="" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"></h5>
+          <small>Créé le </small>
+        </div>
+        <p class="mb-1"></p>
+        <small>Par</small>
+      </a>
+    </div>
+    <div class="alert alert-secondary">Aucun sujet pour le moment.</div>
+{% endblock %}
