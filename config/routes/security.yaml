@@ -1,3 +1,10 @@
 _security_logout:
     resource: security.route_loader.logout
     type: service
+parameters:
+    uploads_directory: '%kernel.project_dir%/public/uploads'
+
+services:
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%uploads_directory%'

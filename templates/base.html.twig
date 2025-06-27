@@ -22,5 +22,9 @@
     <small>&copy; {{ "now"|date("Y") }} MonForum. Tous droits réservés.</small>
   </footer>
 
+{% block javascripts %}
++    {% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
+
 </body>
 </html>
