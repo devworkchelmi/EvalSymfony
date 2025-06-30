@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>Document</h1>
+<a href="{{ asset('uploads/' ~ document.fileName) }}" target="_blank">
+  📄 Télécharger {{ document.originalName }}
+</a>
 
     <table class="table">
         <tbody>

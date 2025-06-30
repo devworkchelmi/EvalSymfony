@@ -5,7 +5,8 @@
 {% block body %}
   <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="text-primary">📋 {{ board.name }}</h1>
+      <h1 class="text-primary">
+      {{ board.name }}</h1>
       <a href="{{ path('category_show', { id: board.category.id }) }}" class="btn btn-outline-secondary">
         ← Retour à la catégorie
       </a>
@@ -16,7 +17,7 @@
     <hr>
 
     {% if topics is not empty %}
-      <h4 class="mb-3">📌 Sujets disponibles :</h4>
+      <h4 class="mb-3">Sujets disponibles :</h4>
 
       {% for topic in topics %}
         <div class="card mb-3 shadow-sm">

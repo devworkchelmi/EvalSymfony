@@ -3,18 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Document;
-use App\Form\DocumentForm;
+use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/document')]
 final class DocumentController extends AbstractController
 {
-    #[Route(name: 'app_document_index', methods: ['GET'])]
+    #[Route('/', name: 'app_document_index', methods: ['GET'])]
     public function index(DocumentRepository $documentRepository): Response
     {
         return $this->render('document/index.html.twig', [
@@ -23,26 +26,47 @@ final class DocumentController extends AbstractController
     }
 
     #[Route('/new', name: 'app_document_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $document = new Document();
-        $form = $this->createForm(DocumentForm::class, $document);
+        $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($document);
-            $entityManager->flush();
+            $uploadedFile = $form->get('uploadedFile')->getData();
 
-            return $this->redirectToRoute('app_document_index', [], Response::HTTP_SEE_OTHER);
+            if ($uploadedFile) {
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+
+                try {
+                    $uploadedFile->move(
+                        $this->getParameter('documents_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors de l’upload du fichier.');
+                    return $this->redirectToRoute('app_document_new');
+                }
+
+                $document->setFileName($newFilename);
+                $document->setCreatedAt(new \DateTimeImmutable());
+
+                $em->persist($document);
+                $em->flush();
+
+                $this->addFlash('success', 'Fichier envoyé avec succès.');
+                return $this->redirectToRoute('app_document_index');
+            }
         }
 
         return $this->render('document/new.html.twig', [
-            'document' => $document,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{fileName}', name: 'app_document_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_document_show', methods: ['GET'])]
     public function show(Document $document): Response
     {
         return $this->render('document/show.html.twig', [
@@ -50,17 +74,17 @@ final class DocumentController extends AbstractController
         ]);
     }
 
-    #[Route('/{fileName}/edit', name: 'app_document_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_document_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Document $document, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(DocumentForm::class, $document);
+        $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_document_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Document mis à jour.');
+            return $this->redirectToRoute('app_document_index');
         }
 
         return $this->render('document/edit.html.twig', [
@@ -69,14 +93,15 @@ final class DocumentController extends AbstractController
         ]);
     }
 
-    #[Route('/{fileName}', name: 'app_document_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_document_delete', methods: ['POST'])]
     public function delete(Request $request, Document $document, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$document->getFileName(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $document->getId(), $request->request->get('_token'))) {
             $entityManager->remove($document);
             $entityManager->flush();
+            $this->addFlash('success', 'Document supprimé.');
         }
 
-        return $this->redirectToRoute('app_document_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_document_index');
     }
 }
