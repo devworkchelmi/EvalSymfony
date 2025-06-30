@@ -66,15 +66,20 @@ final class DocumentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_document_show', methods: ['GET'])]
-    public function show(Document $document): Response
+    #[Route('/document/{fileName}', name: 'app_document_show')]
+    public function show(string $fileName, DocumentRepository $documentRepository): Response
     {
+        $document = $documentRepository->findOneBy(['fileName' => $fileName]);
+
+        if (!$document) {
+            throw $this->createNotFoundException('Document non trouvé.');
+        }
+
         return $this->render('document/show.html.twig', [
             'document' => $document,
         ]);
     }
-
-    #[Route('/{id}/edit', name: 'app_document_edit', methods: ['GET', 'POST'])]
+    #[Route('/document/{id}/edit', name: 'app_document_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Document $document, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(DocumentType::class, $document);
@@ -93,7 +98,7 @@ final class DocumentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_document_delete', methods: ['POST'])]
+    #[Route('/document/{id}', name: 'app_document_delete', methods: ['POST'])]
     public function delete(Request $request, Document $document, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $document->getId(), $request->request->get('_token'))) {

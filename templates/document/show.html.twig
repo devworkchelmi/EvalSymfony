@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Document{% endblock %}
+{% block title %}📄 Document : {{ document.fileName }}{% endblock %}
 
 {% block body %}
-    <h1>Document</h1>
-<a href="{{ asset('uploads/' ~ document.fileName) }}" target="_blank">
-  📄 Télécharger {{ document.originalName }}
-</a>
+  <div class="container mt-5">
+    <h1 class="mb-3">📄 {{ document.fileName }}</h1>
+    <p class="text-muted">Ajouté le {{ document.createdAt|date('d/m/Y H:i') }}</p>
 
+    <div class="mt-4">
+      <a href="{{ asset('uploads/documents/' ~ document.fileName) }}" class="btn btn-primary" download>
+        ⬇️ Télécharger le document
+      </a>
+      <a href="{{ path('app_document_index') }}" class="btn btn-secondary ms-2">
+        ⬅️ Retour à la liste
+      </a>
+    </div>
+  </div>
     <table class="table">
         <tbody>
             <tr>
