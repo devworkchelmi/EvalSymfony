@@ -1,16 +1,16 @@
-{# templates/forum/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil du Forum{% endblock %}
+{% block title %}Accueil du Forum
+{% endblock %}
 
 {% block body %}
-  <h1 class="mb-4">📚 Catégories</h1>
+<h1 class="mb-4">📚 Catégories</h1>
 
-  <div class="row">
-    {% set categories = [
-      { name: 'Insider', description: 'Accès réservé aux employés internes de l\'entreprise.' },
-      { name: 'Collaborateur', description: 'Pour les partenaires et intervenants externes.' },
-      { name: 'Externe', description: 'Accès limité aux utilisateurs publics ou invités.' }
+<div class="row">
+	{% set categories = [
+      { id: 1 name: 'Insider', description: 'Accès réservé aux employés internes de l\'entreprise.' },
+      { id: 2 name: 'Collaborateur', description: 'Pour les partenaires et intervenants externes.' },
+      { id: 3 name: 'Externe', description: 'Accès limité aux utilisateurs publics ou invités.' }
     ] %}
 
     {% for category in categories %}
@@ -21,7 +21,7 @@
           </div>
           <div class="card-body">
             <p class="card-text">{{ category.description }}</p>
-            <a href="#" class="btn btn-outline-primary w-100">Voir les boards</a>
+          <a href="{{ path('forum_category', { id: category.id }) }}" class="btn btn-outline-primary w-100">Voir les boards</a>
           </div>
         </div>
       </div>

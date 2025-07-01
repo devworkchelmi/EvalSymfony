@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Topic;
 use App\Repository\TopicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

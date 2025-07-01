@@ -20,15 +20,14 @@
       <h4 class="mb-3">Sujets disponibles :</h4>
 
       {% for topic in topics %}
-        <div class="card mb-3 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">{{ topic.title }}</h5>
-            <p class="card-text text-muted">Créé le {{ topic.createdAt|date('d/m/Y H:i') }}</p>
-            <a href="{{ path('topic_show', { id: topic.id }) }}" class="btn btn-outline-primary">
-              Voir les messages
-            </a>
-          </div>
-        </div>
+<a href="{{ path('forum_topic_show', { id: topic.id }) }}" class="list-group-item list-group-item-action">
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{ topic.title }}</h5>
+    <small>Créé le {{ topic.createdAt|date('d/m/Y H:i') }}</small>
+  </div>
+  <p class="mb-1">{{ topic.content|slice(0, 100) }}...</p>
+  <small>Par {{ topic.author.username }}</small>
+</a>
       {% endfor %}
     {% else %}
       <div class="alert alert-info">Aucun sujet dans ce board pour l’instant.</div>
