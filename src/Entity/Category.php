@@ -79,4 +79,14 @@ class Category
         $this->allowedRoles = $allowedRoles;
         return $this;
     }
+    public function getDescription(): array
+    {
+        return $this->description;
+    }
+
+    public function setDescription(array $description): static
+    {
+        $this->description = $description;
+        return $this;
+    }
 }

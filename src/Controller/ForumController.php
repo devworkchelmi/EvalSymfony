@@ -15,14 +15,14 @@ class ForumController extends AbstractController
 #[Route('/forum', name: 'forum_index')]
 public function index(CategoryRepository $categoryRepository): Response
 {
-    $categories = $categoryRepository->findAll();
-
+      $categories = $categoryRepository->findAll();
+      
     return $this->render('forum/index.html.twig', [
         'categories' => $categories,
     ]);
     }
 
-    #[Route('/category/{id}', name: 'category')]
+    #[Route('/category/{id}', name: 'forum_category')]
     public function showCategory(Category $category): Response
     {
         return $this->render('forum/category.html.twig', [
