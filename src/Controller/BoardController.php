@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
 use App\Entity\Board;
+=======
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,6 +19,7 @@ final class BoardController extends AbstractController
             'controller_name' => 'BoardController',
         ]);
     }
+<<<<<<< HEAD
 
     #[Route('/board/{id}', name: 'board_show')]
     public function show(Board $board): Response
@@ -28,4 +32,6 @@ final class BoardController extends AbstractController
             'topics' => $topics,
         ]);
     }
+=======
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 }

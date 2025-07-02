@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
 use App\Entity\Category;
+=======
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,6 +19,7 @@ final class CategoryController extends AbstractController
             'controller_name' => 'CategoryController',
         ]);
     }
+<<<<<<< HEAD
 
      #[Route('/category/{id}', name: 'category_show')]
     public function show(Category $category): Response
@@ -26,4 +30,6 @@ final class CategoryController extends AbstractController
             'boards' => $category->getBoards(),
         ]);
     }
+=======
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 }

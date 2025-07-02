@@ -9,6 +9,15 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/**
+ * @extends ServiceEntityRepository<User>
+ */
+=======
+>>>>>>> 78c486ae9d339e6df893c8a8326abd3c5bcc4104
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,6 +25,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    /**
+     * Used to upgrade (rehash) the user's password automatically over time.
+     */
+=======
+>>>>>>> 78c486ae9d339e6df893c8a8326abd3c5bcc4104
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -27,6 +45,36 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    //    /**
+    //     * @return User[] Returns an array of User objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('u.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?User
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+}
+=======
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
     public function findByEmail(string $email): ?User
     {
         return $this->findOneBy(['email' => $email]);
@@ -147,4 +195,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             'topicCount' => $stats['topicCount']
         ];
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 78c486ae9d339e6df893c8a8326abd3c5bcc4104
+>>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
