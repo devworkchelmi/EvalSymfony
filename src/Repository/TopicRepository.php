@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <?php 
-=======
-<?php
->>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 
 namespace App\Repository;
 
@@ -19,9 +15,7 @@ class TopicRepository extends ServiceEntityRepository
         parent::__construct($registry, Topic::class);
     }
 
-<<<<<<< HEAD
     // Chargement d'un topic avec ses messages et auteurs
-=======
     public function findByBoardWithAuthors(Board $board, int $page = 1, int $limit = 20): array
     {
         $offset = ($page - 1) * $limit;
@@ -38,20 +32,16 @@ class TopicRepository extends ServiceEntityRepository
             ->getResult();
     }
 
->>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
     public function findWithMessages(int $topicId): ?Topic
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.messages', 'm')
             ->leftJoin('m.author', 'ma')
-<<<<<<< HEAD
             ->leftJoin('t.author', 'ta')
             ->addSelect('m', 'ma', 'ta')
-=======
             ->leftJoin('m.files', 'f')
             ->leftJoin('t.author', 'ta')
             ->addSelect('m', 'ma', 'f', 'ta')
->>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
             ->where('t.id = :id')
             ->setParameter('id', $topicId)
             ->orderBy('m.createdAt', 'ASC')
@@ -59,10 +49,7 @@ class TopicRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-<<<<<<< HEAD
     // Autres méthodes utiles (récents, par board, par user...)
-=======
->>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
     public function findRecentTopics(int $limit = 10): array
     {
         return $this->createQueryBuilder('t')
@@ -75,11 +62,6 @@ class TopicRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-<<<<<<< HEAD
-} 
-
-
-=======
 
     public function findByUser(User $user): array
     {
@@ -105,4 +87,3 @@ class TopicRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 }
->>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251

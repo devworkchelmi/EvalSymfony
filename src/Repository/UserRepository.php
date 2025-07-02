@@ -153,7 +153,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             'topicCount' => $stats['topicCount']
         ];
     }
-<<<<<<< HEAD
-}
-=======
 }

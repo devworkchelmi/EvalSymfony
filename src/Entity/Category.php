@@ -79,7 +79,6 @@ class Category
         $this->allowedRoles = $allowedRoles;
         return $this;
     }
-<<<<<<< HEAD
     public function getDescription(): array
     {
         return $this->description;
@@ -90,6 +89,4 @@ class Category
         $this->description = $description;
         return $this;
     }
-=======
->>>>>>> 95cb2b9e4c384f64e798e3109940de957a6d0251
 }
