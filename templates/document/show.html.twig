@@ -3,31 +3,41 @@
 {% block title %}📄 Document : {{ document.fileName }}{% endblock %}
 
 {% block body %}
-  <div class="container mt-5">
-    <h1 class="mb-3">📄 {{ document.fileName }}</h1>
-    <p class="text-muted">Ajouté le {{ document.createdAt|date('d/m/Y H:i') }}</p>
+<div class="container mt-5">
+  <h1 class="mb-3">📄 {{ document.fileName }}</h1>
+  <p class="text-muted">Ajouté le {{ document.createdAt|date('d/m/Y H:i') }}</p>
 
-    <div class="mt-4">
-      <a href="{{ asset('uploads/documents/' ~ document.fileName) }}" class="btn btn-primary" download>
-        ⬇️ Télécharger le document
-      </a>
-      <a href="{{ path('app_document_index') }}" class="btn btn-secondary ms-2">
-        ⬅️ Retour à la liste
-      </a>
-    </div>
-  </div>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>FileName</th>
-                <td>{{ document.fileName }}</td>
-            </tr>
-        </tbody>
-    </table>
+  {# Actions #}
+  <div class="d-flex flex-wrap gap-2 mt-4">
+    <a href="{{ asset('uploads/documents/' ~ document.fileName) }}" class="btn btn-primary" download>
+      ⬇️ Télécharger le document
+    </a>
 
-    <a href="{{ path('app_document_index') }}">back to list</a>
-
-    <a href="{{ path('app_document_edit', {'id': document.id}) }}">edit</a>
+    <a href="{{ path('app_document_edit', {'id': document.id}) }}" class="btn btn-warning">
+      ✏️ Modifier
+    </a>
 
     {{ include('document/_delete_form.html.twig', { document: document }) }}
+
+    <a href="{{ path('app_document_index') }}" class="btn btn-outline-secondary">
+      ⬅️ Retour à la liste des documents
+    </a>
+  </div>
+
+  {# Détails du document #}
+  <hr class="my-4">
+
+  <table class="table table-bordered table-hover mt-3">
+    <tbody>
+      <tr>
+        <th scope="row">Nom du fichier</th>
+        <td>{{ document.fileName }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Date d'ajout</th>
+        <td>{{ document.createdAt ? document.createdAt|date('d/m/Y à H:i') : 'Non renseignée' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 {% endblock %}
