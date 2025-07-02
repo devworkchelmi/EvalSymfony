@@ -1,0 +1,23 @@
+{# liste des catégories #}
+
+{% extends 'base.html.twig' %}
+{% block title %}Accueil du Forum{% endblock %}
+{% block body %}
+  <h1 class="mb-4">📚 Catégories</h1>
+
+  <div class="row">
+    {% for category in categories %}
+      <div class="col-md-6 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">{{ category.name }}</div>
+          <div class="card-body">
+            <p>{{ category.description }}</p>
+            <a href="{{ path('category_show', {id: category.id}) }}" class="btn btn-outline-primary">Voir les boards</a>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="alert alert-info">Aucune catégorie pour l’instant.</div>
+    {% endfor %}
+  </div>
+{% endblock %}
