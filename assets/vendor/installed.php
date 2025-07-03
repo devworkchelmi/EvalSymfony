@@ -1,17 +1,7 @@
 <?php return array (
-  '@hotwired/stimulus' => 
+  'app' => 
   array (
-    'version' => '3.2.2',
-    'dependencies' => 
-    array (
-    ),
-    'extraFiles' => 
-    array (
-    ),
-  ),
-  '@hotwired/turbo' => 
-  array (
-    'version' => '7.3.0',
+    'version' => '0.1.0',
     'dependencies' => 
     array (
     ),

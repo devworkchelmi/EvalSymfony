@@ -1,19 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer un compte
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card shadow border-0">
+				<div class="card-body" style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); border-radius: 8px;">
+					<h1 class="card-title text-center text-light mb-4">📝 Inscription</h1>
 
-    {{ form_errors(registrationForm) }}
+					{{ form_start(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+<div class="mb-3 text-light">
+    {{ form_row(registrationForm.username, { attr: { class: 'form-control' } }) }}
+</div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+					<div class="mb-3 text-light">
+						{{ form_label(registrationForm.email) }}
+						{{ form_widget(registrationForm.email, { attr: { class: 'form-control' } }) }}
+						{{ form_errors(registrationForm.email) }}
+					</div>
+
+					<div class="mb-3 text-light">
+						{{ form_label(registrationForm.plainPassword) }}
+						{{ form_widget(registrationForm.plainPassword, { attr: { class: 'form-control' } }) }}
+						{{ form_errors(registrationForm.plainPassword) }}
+					</div>
+
+					<div class="form-check mb-3 text-light">
+						{{ form_widget(registrationForm.agreeTerms, { attr: { class: 'form-check-input' } }) }}
+						{{ form_label(registrationForm.agreeTerms, null, { label_attr: { class: 'form-check-label' } }) }}
+						{{ form_errors(registrationForm.agreeTerms) }}
+					</div>
+
+					<div class="d-grid">
+						<button type="submit" class="btn btn-light text-dark fw-bold">Créer un compte</button>
+					</div>
+
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
