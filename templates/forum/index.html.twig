@@ -4,7 +4,16 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="mb-4 text-light">📚 Catégories</h1>
+
+<div class="container mt-5 text-center text-light">
+	<h1>Bienvenue sur le Forum</h1>
+	<p class="lead">Plateforme interne pour les équipes</p>
+
+	<a href="{{ path('app_test_info') }}" class="btn btn-outline-primary mt-4">
+		🧪 Tester le formulaire d'informations
+	</a>
+</div>
+<h2 class="mb-4 text-light">📚 Catégories</h2>
 
 <div class="row">
 	{% set categories = [

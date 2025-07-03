@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class TopicController extends AbstractController
 {
-    // #[Route('/topic', name: 'app_topic')]
-    // public function index(): Response
-    // {
-    //     return $this->render('topic/index.html.twig', [
-    //         'controller_name' => 'TopicController',
-    //     ]);
-    // }
+    #[Route('/topic', name: 'app_topic')]
+    public function index(): Response
+    {
+        return $this->render('forum/topic.html.twig', [
+            'controller_name' => 'TopicController',
+        ]);
+    }
 
     #[Route('/topic/{id}', name: 'topic_show')]
     public function show(TopicRepository $topicRepository, int $id): Response
