@@ -20,7 +20,7 @@
 						<div class="text-muted small">Posté le
 							{{ message.createdAt|date('d/m/Y H:i') }}</div>
 					</div>
-					<a href="{{ path('forum_board_show', { id: topic.board.id }) }}" class="btn btn-secondary">
+					<a href="{{ path('forum_board', { id: topic.board.id }) }}" class="btn btn-secondary">
 						⬅️ Retour au board
 					</a>
 

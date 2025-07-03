@@ -1,31 +1,11 @@
-<<<<<<< HEAD
 {% extends 'base.html.twig' %}
 
-=======
-{# Page d’une catégorie avec ses boards #}
-
-{% extends 'base.html.twig' %}
->>>>>>> 1bb1606be6152116918aa43113193e016221f33f
 {% block title %}Boards - {{ category.name }}{% endblock %}
 {% block body %}
   <h2 class="mb-4">📁 {{ category.name }}</h2>
 
-<<<<<<< HEAD
 {% for board in category %}
   <a href="{{ path('forum_category', { id: category.id }) }}" class="btn btn-outline-primary w-100">Voir les boards</a>
 {% endfor %}
     <div class="alert alert-warning">Aucun board dans cette catégorie.</div>
-=======
-  {% for board in category.boards %}
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">{{ board.name }}</h5>
-        <p>{{ board.description }}</p>
-        <a href="{{ path('board_show', {id: board.id}) }}" class="btn btn-outline-dark">Voir les sujets</a>
-      </div>
-    </div>
-  {% else %}
-    <div class="alert alert-warning">Aucun board dans cette catégorie.</div>
-  {% endfor %}
->>>>>>> 1bb1606be6152116918aa43113193e016221f33f
 {% endblock %}
