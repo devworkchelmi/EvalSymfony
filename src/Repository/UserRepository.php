@@ -9,9 +9,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
-/**
- * @extends ServiceEntityRepository<User>
- */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
@@ -19,9 +16,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -92,7 +86,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findRecentUsers(int $days = 7): array
     {
         $since = new \DateTime('-' . $days . ' days');
-
+        
         return $this->createQueryBuilder('u')
             ->where('u.createdAt >= :since')
             ->setParameter('since', $since)
@@ -120,7 +114,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         foreach ($result as $row) {
             $roles = $row['roles'];
             $count = $row['count'];
-
+            
             foreach ($roles as $role) {
                 if (isset($counts[$role])) {
                     $counts[$role] += $count;

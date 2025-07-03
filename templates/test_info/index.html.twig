@@ -1,0 +1,36 @@
+{# templates/test_info/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire Test Info{% endblock %}
+
+{% block body %}
+<div class="container mt-5 text-light">
+  <h1 class="mb-4">🧪 Formulaire Test Info</h1>
+
+  <form method="get">
+    <div class="mb-3 ">
+      <label for="prenom" class="form-label">Prénom</label>
+      <input type="text" class="form-control" name="prenom" id="prenom" value="{{ prenom ?? '' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom</label>
+      <input type="text" class="form-control" name="nom" id="nom" value="{{ nom ?? '' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="age" class="form-label">Âge</label>
+      <input type="number" class="form-control" name="age" id="age" value="{{ age ?? '' }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+  </form>
+
+  {% if prenom and nom and age %}
+    <div class="alert alert-success mt-4">
+      👋 Bonjour <strong>{{ prenom }} {{ nom }}</strong>, vous avez <strong>{{ age }}</strong> ans !
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

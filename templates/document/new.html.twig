@@ -1,4 +1,43 @@
 {% extends 'base.html.twig' %}
+<<<<<<< HEAD
+
+{% block title %}Nouveau document{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">📤 Ajouter un document</h1>
+
+    {# Affichage des flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label == 'success' ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(form, { attr: { enctype: "multipart/form-data" } }) }}
+        <div class="mb-3">
+            {{ form_label(form.uploadedFile, 'Fichier à envoyer') }}
+            {{ form_widget(form.uploadedFile, {
+                attr: {
+                    class: 'form-control',
+                    accept: '.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.zip,.rar'
+                }
+            }) }}
+            <div class="form-text">
+                Formats acceptés : PDF, Word, Excel, Images, ZIP – Taille max : 10 Mo
+            </div>
+            {{ form_errors(form.uploadedFile) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            🚀 Envoyer le fichier
+        </button>
+    {{ form_end(form) }}
+</div>
+=======
 {% block body %}
 <h1>Uploader un fichier</h1>
 
@@ -7,4 +46,5 @@
     <button class="btn btn-success">Uploader</button>
 {{ form_end(form) }}
 
+>>>>>>> 1bb1606be6152116918aa43113193e016221f33f
 {% endblock %}

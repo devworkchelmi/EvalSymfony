@@ -1,23 +1,30 @@
-{# liste des catégories #}
-
 {% extends 'base.html.twig' %}
-{% block title %}Accueil du Forum{% endblock %}
-{% block body %}
-  <h1 class="mb-4">📚 Catégories</h1>
 
-  <div class="row">
+{% block title %}Accueil du Forum
+{% endblock %}
+
+{% block body %}
+<h1 class="mb-4 text-light">📚 Catégories</h1>
+
+<div class="row">
+	{% set categories = [
+      { id: 1, name: 'Insider', description: 'Accès réservé aux employés internes de l\'entreprise.' },
+      { id: 2, name: 'Collaborateur', description: 'Pour les partenaires et intervenants externes.' },
+      { id: 3, name: 'Externe', description: 'Accès limité aux utilisateurs publics ou invités.' },
+    ] %}
+
     {% for category in categories %}
-      <div class="col-md-6 mb-3">
-        <div class="card shadow-sm">
-          <div class="card-header bg-primary text-white">{{ category.name }}</div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-dark text-white fw-bold">
+            {{ category.name }}
+          </div>
           <div class="card-body">
-            <p>{{ category.description }}</p>
-            <a href="{{ path('category_show', {id: category.id}) }}" class="btn btn-outline-primary">Voir les boards</a>
+            <p class="card-text">{{ category.description }}</p>
+          <a href="{{ path('forum_category', { id: category.id }) }}" class="btn btn-outline-primary w-100">Voir les boards</a>
           </div>
         </div>
       </div>
-    {% else %}
-      <div class="alert alert-info">Aucune catégorie pour l’instant.</div>
     {% endfor %}
   </div>
 {% endblock %}
