@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Mes documents{% endblock %}
 
 {% block body %}
@@ -40,4 +41,36 @@
       <div class="alert alert-info mt-4">Aucun document disponible.</div>
     {% endif %}
   </div>
+=======
+{% block title %}Document index{% endblock %}
+
+{% block body %}
+    <h1>Document index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FileName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr>
+                <td></td>
+                <td>
+                    <a href="">show</a>
+                    <a href="">edit</a>
+                </td>
+            </tr>
+       
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+      
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_document_new') }}">Create new</a>
+>>>>>>> 1bb1606be6152116918aa43113193e016221f33f
 {% endblock %}
