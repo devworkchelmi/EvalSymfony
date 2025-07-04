@@ -112,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-//
+        //
     }
 
     public function getIsBlocked(): ?bool
@@ -185,6 +185,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function assignRoleFromEmail(): void
+    {
+        $email = $this->getEmail();
+
+        if (str_contains($email, '@insider.fr')) {
+            $this->setRoles(['ROLE_INSIDER']);
+        } elseif (str_contains($email, '@collaborator.fr')) {
+            $this->setRoles(['ROLE_COLLABORATION']);
+        } elseif (str_contains($email, '@external.fr')) {
+            $this->setRoles(['ROLE_EXTERNE']);
+        } else {
+            $this->setRoles(['ROLE_USER']);
+        }
+    }
+
     private function setRoleBasedOnEmail(): void
     {
         if ($this->email === null) {
@@ -205,7 +220,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getMainRole(): string
     {
         $roles = $this->getRoles();
-        
+
         if (in_array('ROLE_ADMIN', $roles)) {
             return 'Admin';
         } elseif (in_array('ROLE_INSIDER', $roles)) {
@@ -215,7 +230,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         } elseif (in_array('ROLE_EXTERNE', $roles)) {
             return 'Externe';
         }
-        
+
         return 'Utilisateur';
     }
 

@@ -33,18 +33,32 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark navbar-gradient mb-4">
-      <div class="container">
-        <a class="navbar-brand" href="#">🏠 MonForum</a>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-gradient mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('app_home') }}">🏠 MonForum</a>
+
+        <ul class="navbar-nav ms-auto">
+          {% if app.user %}
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path('app_logout') }}">🚪 Déconnexion</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path('app_login') }}">🔐 Connexion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path('app_register') }}">📝 Inscription</a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
     </nav>
-
-    <main class="container">
+        <main class="container">
       {% block body %}
         <!-- Carte vers la commande test -->
         <div class="card shadow-sm mt-4">
           <div class="card-body text-center">
-            <h5 class="card-title">🧪 Tester les entrées utilisateurs</h5>
+            <h5 class="card-title">🧪 les entrées utilisateurs</h5>
             <p class="card-text">Formulaire pour tester les styles de la console Symfony</p>
             <a href="{{ path('app_test_info') }}" class="btn btn-primary">Accéder au test</a>
           </div>
@@ -52,14 +66,13 @@
       {% endblock %}
     </main>
 
-    <footer class="text-center text-muted mt-5 mb-3">
-      <small>&copy; {{ "now"|date("Y") }} MonForum</small>
-    </footer>
+			<footer class="text-center text-muted mt-5 mb-3">
+				<small>&copy;
+					{{ "now"|date("Y") }}
+					MonForum</small>
+			</footer>
 
-    {% block javascripts %}
-      {% block importmap %}
-        {{ importmap('app') }}
-      {% endblock %}
-    {% endblock %}
-  </body>
-</html>
+			{% block javascripts %}
+			{% endblock %}
+		</body>
+	</html>

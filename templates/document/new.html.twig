@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+<<<<<<< HEAD
 
 {% block title %}Nouveau document{% endblock %}
 
@@ -36,4 +37,14 @@
         </button>
     {{ form_end(form) }}
 </div>
+=======
+{% block body %}
+<h1>Uploader un fichier</h1>
+
+{{ form_start(form, { 'attr': { 'enctype': 'multipart/form-data' } }) }}
+    {{ form_row(form.upload) }}
+    <button class="btn btn-success">Uploader</button>
+{{ form_end(form) }}
+
+>>>>>>> 1bb1606be6152116918aa43113193e016221f33f
 {% endblock %}
