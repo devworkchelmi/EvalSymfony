@@ -1,47 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ board.name }} - Sujets{% endblock %}
+{% block title %}
+	{{ board.name }}
+	- Sujets
+{% endblock %}
 
 {% block body %}
-  <div class="container mt-4 text-light">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="text-light">🧩 {{ board.name }}</h1>
-      <a href="{{ path('category_show', { id: board.category.id }) }}" class="btn btn-outline-light btn-sm">
-        ← Retour à la catégorie
-      </a>
-    </div>
+	<div class="container mt-4 text-light">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h1 class="text-light">🧩
+				{{ board.name }}</h1>
+			<a href="{{ path('forum_category', { id: board.category.id }) }}" class="btn btn-outline-secondary">
+				← Retour à la catégorie
+			</a>
+		</div>
 
-    <p class="text-muted">{{ board.description }}</p>
+		<p class="text-muted">{{ board.description }}</p>
 
-    {% if app.user %}
-      <div class="mb-4 text-end">
-        <a href="{{ path('topic_new', { id: board.id }) }}" class="btn btn-success animate__animated animate__fadeInRight">
-          ➕ Créer un nouveau sujet
-        </a>
-      </div>
-    {% endif %}
+		{% if app.user %}
+			<div class="mb-4 text-end">
+				<a href="{{ path('topic_new', { id: board.id }) }}" class="btn btn-success animate__animated animate__fadeInRight">
+					➕ Créer un nouveau sujet
+				</a>
+			</div>
+		{% endif %}
 
-    <hr class="border-light">
+		<hr class="border-light">
 
-    {% if topics is not empty %}
-      <div class="list-group">
-        {% for topic in topics %}
-          <a href="{{ path('topic_show', { id: topic.id }) }}"
-             class="list-group-item list-group-item-action mb-3 shadow-sm animate__animated animate__fadeInUp">
-            <div class="d-flex justify-content-between">
-              <h5 class="mb-1">💬 {{ topic.title }}</h5>
-              <small>🕒 {{ topic.createdAt|date('d/m/Y H:i') }}</small>
-            </div>
-            <p class="mb-1">{{ topic.content|slice(0, 100) ~ '...' }}</p>
-            <small>👤 {{ topic.author.username }}</small>
-          </a>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="alert alert-info mt-4">Aucun sujet dans ce board pour l’instant.</div>
-    {% endif %}
-  </div>
+		{% if topics is not empty %}
+			<div class="list-group">
+				{% for topic in topics %}
+					<a href="{{ path('topic_show', { id: topic.id }) }}" class="list-group-item list-group-item-action mb-3 shadow-sm animate__animated animate__fadeInUp">
+						<div class="d-flex justify-content-between">
+							<h5 class="mb-1">💬
+								{{ topic.title }}</h5>
+							<small>🕒
+								{{ topic.createdAt|date('d/m/Y H:i') }}</small>
+						</div>
+						<p class="mb-1">{{ topic.content|slice(0, 100) ~ '...' }}</p>
+						<small>👤
+							{{ topic.author.username }}</small>
+					</a>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class="alert alert-info mt-4">Aucun sujet dans ce board pour l’instant.</div>
+		{% endif %}
+	</div>
 
-  {# CDN animate.css pour les animations #}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	{# CDN animate.css pour les animations #}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 {% endblock %}
