@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau sujet{% endblock %}
+
+{% block body %}
+  <div class="container mt-4 text-light">
+    <h1>➕ Créer un nouveau sujet dans "{{ board.name }}"</h1>
+    {{ form_start(form) }}
+      <div class="mb-3">
+        {{ form_row(form.title) }}
+      </div>
+      <div class="mb-3">
+        {{ form_row(form.content) }}
+      </div>
+      <button class="btn btn-primary">Publier</button>
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

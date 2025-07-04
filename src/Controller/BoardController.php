@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\BoardRepository;
 use App\Entity\Board;
+use App\Repository\TopicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,20 +12,21 @@ use Symfony\Component\Routing\Attribute\Route;
 final class BoardController extends AbstractController
 {
     #[Route('/board', name: 'app_board')]
-    public function index(): Response
+    public function index(BoardRepository $boardRepository): Response
     {
+        $boards = $boardRepository->findAll();
+
         return $this->render('board/index.html.twig', [
-            'controller_name' => 'BoardController',
+            'boards' => $boards,
         ]);
     }
 
-    #[Route('/board/{id}', name: 'board_show')]
-    public function show(Board $board): Response
+    #[Route('/board/{id}', name: 'forum_board')]
+    public function show(Board $board, TopicRepository $topicRepository): Response
     {
-        // Si tu as une relation avec des topics
-        $topics = $board->getTopics();
+        $topics = $topicRepository->findBy(['board' => $board], ['createdAt' => 'DESC']);
 
-        return $this->render('forum/board.html.twig', [
+        return $this->render('board/show.html.twig', [
             'board' => $board,
             'topics' => $topics,
         ]);

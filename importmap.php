@@ -12,7 +12,15 @@
  * The "importmap:require" command can be used to add new entries to this file.
  */
 return [
-    'app' => [
-        'version' => '0.1.0',
+    '@hotwired/stimulus' => [
+        'version' => '3.2.2',
     ],
+    '@symfony/stimulus-bundle' => [
+        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
+    ],
+     'app' => [
+        'path' => 'assets/app.js',
+        'entrypoint' => true,
+    ],
+
 ];

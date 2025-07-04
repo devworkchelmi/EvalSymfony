@@ -1,36 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ board.name }} - Sujets{% endblock %}
+{% block title %}
+	{{ board.name }}
+	- Sujets
+{% endblock %}
 
 {% block body %}
-  <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="text-primary">
-      {{ board.name }}</h1>
-      <a href="{{ path('category_show', { id: board.category.id }) }}" class="btn btn-outline-secondary">
-        ← Retour à la catégorie
-      </a>
-    </div>
+	<div class="container mt-4 text-light">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h1 class="text-primary">
+				{{ board.name }}</h1>
+			<a href="{{ path('category_show', { id: board.category.id }) }}" class="btn btn-outline-secondary">
+				← Retour à la catégorie
+			</a>
+		</div>
 
-    <p class="text-muted">{{ board.description }}</p>
+		<p class="text-muted">{{ board.description }}</p>
 
-    <hr>
+		<hr>
 
-    {% if topics is not empty %}
-      <h4 class="mb-3">Sujets disponibles :</h4>
+		{% if topics is not empty %}
+			<h4 class="mb-3 text-light">Sujets disponibles :</h4>
 
-      {% for topic in topics %}
-<a href="{{ path('forum_topic_show', { id: topic.id }) }}" class="list-group-item list-group-item-action">
-  <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">{{ topic.title }}</h5>
-    <small>Créé le {{ topic.createdAt|date('d/m/Y H:i') }}</small>
-  </div>
-  <p class="mb-1">{{ topic.content|slice(0, 100) }}...</p>
-  <small>Par {{ topic.author.username }}</small>
-</a>
-      {% endfor %}
-    {% else %}
-      <div class="alert alert-info">Aucun sujet dans ce board pour l’instant.</div>
-    {% endif %}
-  </div>
+			{% for topic in topics %}
+				<a href="{{ path('app_topic', { id: topic.id }) }}" class="list-group-item list-group-item-action">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">{{ topic.title }}</h5>
+						<small>Créé le
+							{{ topic.createdAt|date('d/m/Y H:i') }}</small>
+					</div>
+					<p class="mb-1">{{ topic.content|slice(0, 100) }}...</p>
+					<small>Par
+						{{ topic.author.username }}</small>
+				</a>
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-info">Aucun sujet dans ce board pour l’instant.</div>
+		{% endif %}
+	</div>
 {% endblock %}

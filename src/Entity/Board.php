@@ -24,6 +24,7 @@ class Board
 
     #[ORM\OneToMany(mappedBy: 'board', targetEntity: Topic::class, orphanRemoval: true)]
     private Collection $topics;
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -80,4 +81,17 @@ class Board
         }
         return $this;
     }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
 }
